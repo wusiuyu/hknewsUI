@@ -3,6 +3,8 @@
 import base64
 import requests
 
+import streamlit as st
+
 TOKEN = st.secrets["TOKEN"]
 
 def check_github_file_exists(url: str) -> bool:
