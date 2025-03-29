@@ -10,7 +10,7 @@ from io import StringIO
 import time
 from github_utilities import read_github_file
 
-NEWS_DB_URL = f"https://api.github.com/repos/wusiuyu/hknews/contents/news_db.csv"
+NEWS_DB_URL = f"https://api.github.com/repos/wusiuyu/hknews/contents/rthk_db.csv"
 WAIT_TIME = 5
 
 def run():
