@@ -48,7 +48,7 @@ def run():
             st.write(f"**Title**: {selected_row['title']}")
             st.write(f"**Time**: {selected_row['date']}")
             st.write(f"**URL**: {selected_row['url']}")
-            st.write(f"**Content**: {selected_row['news_content']}")
+            st.write(f"**Content**:\n\n{selected_row['news_content']}")
     else:
         st.warning("No data available. Please check the GitHub URL.")
     
