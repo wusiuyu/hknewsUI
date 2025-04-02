@@ -41,7 +41,7 @@ def run():
 
         # Show the details at the bottom
         if selected_option:
-            selected_title = selected_option.split(' )')[1]
+            selected_title = selected_option.split(')')[1]
             selected_row = media_df[media_df['title'] == selected_title].iloc[0]
             st.write("---")  # Divider
             st.subheader("News Details")
