@@ -36,12 +36,12 @@ def run():
 
     # Generate options for the selectbox
     if not media_df.empty:
-        options = media_df.apply(lambda row: f"({row['date']}) {row['title']}", axis=1)
+        options = media_df.apply(lambda row: f"{row['title']} ({row['date']})", axis=1)
         selected_option = st.selectbox("Choose a title and time:", options=options)
 
         # Show the details at the bottom
         if selected_option:
-            selected_title = selected_option.split(')')[1]
+            selected_title = selected_option.split(' (')[0]
             selected_row = media_df[media_df['title'] == selected_title].iloc[0]
             st.write("---")  # Divider
             st.subheader("News Details")
