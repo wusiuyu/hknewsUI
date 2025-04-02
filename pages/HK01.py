@@ -37,7 +37,7 @@ def run():
 
     # Generate options for the selectbox
     if not media_df.empty:
-        options = media_df.apply(lambda row: f"{row['title']} ({row['date']})", axis=1)
+        options = media_df.apply(lambda row: f"{row['date']} ({row['title']})", axis=1)
         selected_option = st.selectbox("Choose a title and time:", options=options)
 
         # Show the details at the bottom
