@@ -14,16 +14,16 @@ def run():
     st.write("# HK News 👋")
 
     # create a clear button in the sidebar
-    if st.sidebar.button('Clear'):
-        # clear the placeholder
-        st.session_state.messages = []
-
     st.markdown(
         """
         HK News Page Index
         **👈 Select a Media from the sidebar** to see find News
     """
     )
+
+    if st.button("Refresh all News"):
+        st.cache_data.clear()  # Clear cache globally
+        st.success("All News Refreshed")
 
 
 if __name__ == "__main__":
