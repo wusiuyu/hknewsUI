@@ -48,11 +48,11 @@ def run():
     if not media_df.empty:
         options = media_df.apply(lambda row: f"({row['date']}) {row['title']}", axis=1).tolist()
 
-        # Ensure session state tracks the selected option
+        # Initialize session state if not present
         if "selected_option" not in st.session_state:
             st.session_state.selected_option = options[0]  # Default to the first option initially
 
-        # Create the selectbox and update session state immediately
+        # Create the selectbox and set the current selection directly
         selected_option = st.selectbox(
             "Choose a title and time:",
             options=options,
@@ -60,9 +60,8 @@ def run():
             key="news_selector"
         )
 
-        # Update session state right after user selection
-        if selected_option != st.session_state.selected_option:
-            st.session_state.selected_option = selected_option
+        # Update session state BEFORE rendering anything dependent on the selection
+        st.session_state.selected_option = selected_option
 
         # Show the details at the bottom
         selected_title = selected_option.split(') ')[1]
