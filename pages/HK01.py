@@ -47,7 +47,8 @@ def run():
             st.write("---")  # Divider
             st.subheader("News Details")
             st.write(f"**Title**: {selected_row['title']}")
-            st.write(f"**Time**: {selected_row['date']}")
+            st.write(f"**Publish**: {selected_row['date']}")
+            st.write(f"**Update**: {selected_row['last_update']}")
             st.write(f"**URL**: {selected_row['url']}")
             st.write(f"**Content**:\n\n{selected_row['news_content']}")
     else:
