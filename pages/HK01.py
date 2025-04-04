@@ -34,24 +34,19 @@ def run():
     st.title("News Titles")
 
     # Display static titles at the top
-    st.write("**Select a news title to view its details:**")
+    st.write("**Browse news titles and expand for details:**")
 
-    # Generate options for the selectbox
+    # Display news items using expanders
     if not media_df.empty:
-        options = media_df.apply(lambda row: f"{row['date'].split("-")[1]}\n{row['title']}", axis=1)
-        selected_option = st.selectbox("Choose a title and time:", options=options)
-
-        # Show the details at the bottom
-        if selected_option:
-            selected_title = selected_option.split('\n')[1]  # Extract the title
-            selected_row = media_df[media_df['title'] == selected_title].iloc[0]
-            st.write("---")  # Divider
-            st.subheader("News Details")
-            st.write(f"**Title**: {selected_row['title']}")
-            st.write(f"**Publish**: {selected_row['date']}")
-            st.write(f"**Update**: {selected_row['last_update']}")
-            st.write(f"**URL**: {selected_row['url']}")
-            st.write(f"**Content**:\n\n{selected_row['news_content']}")
+        for _, row in media_df.iterrows():
+            with st.expander(f"({row['date']}) {row['title'][:50]}..."):
+                st.write("---")
+                st.subheader("News Details")
+                st.write(f"**Title**: {row['title']}")
+                st.write(f"**Publish**: {row['date']}")
+                st.write(f"**Update**: {row['last_update']}")
+                st.write(f"**URL**: {row['url']}")
+                st.write(f"**Content**:\n\n{row['news_content']}")
     else:
         st.warning("No data available. Please check the GitHub URL.")
     
@@ -59,6 +54,7 @@ def run():
         if st.button("Refresh all News"):
             st.cache_data.clear()  # Clear cache globally
             st.success("All News Refreshed")
+
 
 
 if __name__ == "__main__":
