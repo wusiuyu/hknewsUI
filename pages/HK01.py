@@ -15,17 +15,6 @@ from github_utilities import read_github_file
 NEWS_DB_URL = f"https://api.github.com/repos/wusiuyu/hknews/contents/hk01_db.csv"
 WAIT_TIME = 5
 
-# Embed custom CSS to modify the text size in the selectbox
-st.markdown(
-    """
-    <style>
-    div[role="listbox"] {
-        font-size: 14px; /* Adjust the size as needed */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 # Function to read data from GitHub and cache it
 @st.cache_data
@@ -49,12 +38,12 @@ def run():
 
     # Generate options for the selectbox
     if not media_df.empty:
-        options = media_df.apply(lambda row: f"({row['date']}) {row['title']}", axis=1)
+        options = media_df.apply(lambda row: f"({row['date']})\n{row['title']}", axis=1)
         selected_option = st.selectbox("Choose a title and time:", options=options)
 
         # Show the details at the bottom
         if selected_option:
-            selected_title = selected_option.split(') ')[1]
+            selected_title = selected_option.split('\n')[1]  # Extract the title
             selected_row = media_df[media_df['title'] == selected_title].iloc[0]
             st.write("---")  # Divider
             st.subheader("News Details")
