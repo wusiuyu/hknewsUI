@@ -45,37 +45,34 @@ def run():
     # Display static titles at the top
     st.write("**Select a news title to view its details:**")
 
-    # Generate options for the selectbox
     if not media_df.empty:
         options = media_df.apply(lambda row: f"({row['date']}) {row['title']}", axis=1).tolist()
 
-        # Use session state to store the last selected option
+        # Ensure session state tracks the selected option
         if "selected_option" not in st.session_state:
             st.session_state.selected_option = options[0]  # Default to the first option initially
 
-        # Determine the index of the last selected option
-        default_index = options.index(st.session_state.selected_option) if st.session_state.selected_option in options else 0
-
-        # Create the selectbox with the default index set
+        # Create the selectbox and update session state immediately
         selected_option = st.selectbox(
             "Choose a title and time:",
             options=options,
-            index=default_index
+            index=options.index(st.session_state.selected_option) if st.session_state.selected_option in options else 0,
+            key="news_selector"
         )
 
-        # Update session state with the current selection
-        st.session_state.selected_option = selected_option
+        # Update session state right after user selection
+        if selected_option != st.session_state.selected_option:
+            st.session_state.selected_option = selected_option
 
         # Show the details at the bottom
-        if selected_option:
-            selected_title = selected_option.split(') ')[1]
-            selected_row = media_df[media_df['title'] == selected_title].iloc[0]
-            st.write("---")  # Divider
-            st.subheader("News Details")
-            st.write(f"**Title**: {selected_row['title']}")
-            st.write(f"**Time**: {selected_row['date']}")
-            st.write(f"**URL**: {selected_row['url']}")
-            st.write(f"**Content**:\n\n{selected_row['news_content']}")
+        selected_title = selected_option.split(') ')[1]
+        selected_row = media_df[media_df['title'] == selected_title].iloc[0]
+        st.write("---")  # Divider
+        st.subheader("News Details")
+        st.write(f"**Title**: {selected_row['title']}")
+        st.write(f"**Time**: {selected_row['date']}")
+        st.write(f"**URL**: {selected_row['url']}")
+        st.write(f"**Content**:\n\n{selected_row['news_content']}")
     else:
         st.warning("No data available. Please check the GitHub URL.")
     
