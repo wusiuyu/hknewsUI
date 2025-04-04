@@ -39,7 +39,7 @@ def run():
     # Display news items using expanders
     if not media_df.empty:
         for _, row in media_df.iterrows():
-            with st.expander(f"({row['date']}) {row['title'][:50]}..."):
+            with st.expander(f"({row['date']}) {row['title']}"):
                 st.write("---")
                 st.subheader("News Details")
                 st.write(f"**Title**: {row['title']}")
