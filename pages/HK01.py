@@ -38,7 +38,20 @@ def run():
     # Generate options for the selectbox
     if not media_df.empty:
         options = media_df.apply(lambda row: f"({row['date']}) {row['title']}", axis=1)
-        selected_option = st.selectbox("Choose a title and time:", options=options)
+
+        # Use Streamlit's session state to keep track of the last pick
+        if "selected_option" not in st.session_state:
+            st.session_state.selected_option = None
+
+        selected_option = st.selectbox(
+            "Choose a title and time:",
+            options=options,
+            key="news_selector",
+            index=options.tolist().index(st.session_state.selected_option) if st.session_state.selected_option in options.tolist() else 0
+        )
+
+        # Update session state with the current selection
+        st.session_state.selected_option = selected_option
 
         # Show the details at the bottom
         if selected_option:
