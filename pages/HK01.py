@@ -25,6 +25,16 @@ def fetch_news_data(url):
     except:
         return pd.DataFrame()  # Return empty DataFrame if there's an issue
 
+# Function to read data from GitHub and cache it
+@st.cache_data
+def fetch_news_data(url):
+    try:
+        media_csv = read_github_file(url)  # Fetch the CSV from GitHub
+        time.sleep(WAIT_TIME)  # Simulating delay
+        return pd.read_csv(StringIO(media_csv))
+    except:
+        return pd.DataFrame()  # Return empty DataFrame if there's an issue
+
 def run():
     # Load the data once and cache the result
     media_df = fetch_news_data(NEWS_DB_URL)
@@ -37,17 +47,20 @@ def run():
 
     # Generate options for the selectbox
     if not media_df.empty:
-        options = media_df.apply(lambda row: f"({row['date']}) {row['title']}", axis=1)
+        options = media_df.apply(lambda row: f"({row['date']}) {row['title']}", axis=1).tolist()
 
-        # Use Streamlit's session state to keep track of the last pick
+        # Use session state to store the last selected option
         if "selected_option" not in st.session_state:
-            st.session_state.selected_option = None
+            st.session_state.selected_option = options[0]  # Default to the first option initially
 
+        # Determine the index of the last selected option
+        default_index = options.index(st.session_state.selected_option) if st.session_state.selected_option in options else 0
+
+        # Create the selectbox with the default index set
         selected_option = st.selectbox(
             "Choose a title and time:",
             options=options,
-            key="news_selector",
-            index=options.tolist().index(st.session_state.selected_option) if st.session_state.selected_option in options.tolist() else 0
+            index=default_index
         )
 
         # Update session state with the current selection
@@ -70,7 +83,6 @@ def run():
         if st.button("Refresh all News"):
             st.cache_data.clear()  # Clear cache globally
             st.success("All News Refreshed")
-
 
 if __name__ == "__main__":
     run()
