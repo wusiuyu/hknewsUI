@@ -15,6 +15,18 @@ from github_utilities import read_github_file
 NEWS_DB_URL = f"https://api.github.com/repos/wusiuyu/hknews/contents/hk01_db.csv"
 WAIT_TIME = 5
 
+# Embed custom CSS to modify the text size in the selectbox
+st.markdown(
+    """
+    <style>
+    div[role="listbox"] {
+        font-size: 14px; /* Adjust the size as needed */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Function to read data from GitHub and cache it
 @st.cache_data
 def fetch_news_data(url):
