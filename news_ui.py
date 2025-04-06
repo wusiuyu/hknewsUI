@@ -21,11 +21,9 @@ def run():
     """
     )
 
-    with st.sidebar:
-        if st.button("Refresh all News"):
-            st.cache_data.clear()  # Clear cache globally
-            st.success("All News Refreshed")
-            st.experimental_rerun()
+    if st.button("Refresh all News"):
+        st.cache_data.clear()  # Clear cache globally
+        st.success("All News Refreshed")
 
 if __name__ == "__main__":
     run()
