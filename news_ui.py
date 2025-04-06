@@ -25,5 +25,6 @@ def run():
         st.cache_data.clear()  # Clear cache globally
         st.success("All News Refreshed")
 
+
 if __name__ == "__main__":
     run()
