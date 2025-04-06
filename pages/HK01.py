@@ -44,17 +44,12 @@ def run():
                 st.subheader("News Details")
                 st.write(f"**Title**: {row['title']}")
                 st.write(f"**Publish**: {row['date']}")
+                # HK01 Specific with Update Time
                 st.write(f"**Update**: {row['last_update']}")
                 st.write(f"**URL**: {row['url']}")
                 st.write(f"**Content**:\n\n{row['news_content']}")
     else:
         st.warning("No data available. Please check the GitHub URL.")
-    
-    with st.sidebar:
-        if st.button("Refresh all News"):
-            st.cache_data.clear()  # Clear cache globally
-            st.success("All News Refreshed")
-
 
 
 if __name__ == "__main__":
