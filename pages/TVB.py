@@ -44,8 +44,6 @@ def run():
                 st.subheader("News Details")
                 st.write(f"**Title**: {row['title']}")
                 st.write(f"**Publish**: {row['date']}")
-                # HK01 Specific with Update Time
-                st.write(f"**Update**: {row['last_update']}")
                 st.write(f"**URL**: {row['url']}")
                 st.write(f"**Content**:\n\n{row['news_content']}")
     else:
