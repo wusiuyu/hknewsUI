@@ -47,10 +47,10 @@ def run():
                 st.write(f"**URL**: {row['url']}")
                 content = row["title"]
                 content += "\n"
-                content += "＊" * (len(row["title"]) + 1)
+                content += "*" * (len(row["title"]) + 1)
                 content += "\n\n"
                 content += row['news_content']
-                st.write(f"**Content**:\n\n{"content"}")
+                st.write(f"**Content**:\n\n{content}")
     else:
         st.warning("No data available. Please check the GitHub URL.")
 
