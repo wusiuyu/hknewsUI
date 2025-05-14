@@ -26,7 +26,7 @@ def convert_hk_date(date_str):
     chinese_weekday = weekdays[dt.weekday()]  # dt.weekday() gives index 0-6 (Monday-Sunday)
     # Format the date manually
     formatted_date = f"{dt.year}年{dt.month}月{dt.day}日（{chinese_weekday}）"
-    formatted_time = f"香港時間{dt.hour + 1}時{dt.minute:02d}分"  # Adjust to 21:00
+    formatted_time = f"香港時間{dt.hour}時{dt.minute:02d}分"  # Adjust to 21:00
     return formatted_date + "\n\n" + formatted_time
 
 
