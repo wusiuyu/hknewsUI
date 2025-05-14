@@ -46,8 +46,8 @@ def run():
                 st.write(f"**Publish**: {row['date']}")
                 st.write(f"**URL**: {row['url']}")
                 content = row["title"]
-                content += "\n"
-                content += r"x" * (len(row["title"]) + 1)
+                content += "\n\n"
+                content += "＊" * (len(row["title"]) + 1)
                 content += "\n\n"
                 content += row['news_content']
                 st.write(f"**Content**:\n\n{content}")
