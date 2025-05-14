@@ -20,14 +20,14 @@ WAIT_TIME = 5
 
 def convert_hk_date(date_str):
     # Set locale for Chinese formatting (optional, depending on the environment)
-    locale.setlocale(locale.LC_TIME, "zh_HK.UTF-8")
-    # Original datetime string
     dt = datetime.strptime(date_str, "%Y-%m-%d %H:%M")
-    # Format output with weekday and adjusted time
-    formatted_date = dt.strftime("%Y年%-m月%-d日（%A）")  # Format with full weekday name
-    formatted_time = f"香港時間{dt.hour}時{dt.minute:02d}分"
+    # Original datetime string
+    weekdays = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
+    chinese_weekday = weekdays[dt.weekday()]  # dt.weekday() gives index 0-6 (Monday-Sunday)
+    # Format the date manually
+    formatted_date = f"{dt.year}年{dt.month}月{dt.day}日（{chinese_weekday}）"
+    formatted_time = f"香港時間{dt.hour + 1}時{dt.minute:02d}分"  # Adjust to 21:00
     return formatted_date + "\n\n" + formatted_time
-
 
 
 # Function to read data from GitHub and cache it
