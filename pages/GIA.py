@@ -65,6 +65,8 @@ def run():
                 content += "\n\n"
                 content += row['news_content']
                 content += "\n\n"
+                content += "完"
+                content += "\n\n"
                 content += convert_hk_date(row['date'])
                 st.write(f"**Content**:\n\n{content}")
     else:
