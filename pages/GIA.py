@@ -3,8 +3,11 @@
 
 # python -m streamlit run "C:\Projects\Project 034 Azure HK News\HK News UI\src\pages\hk01.py"
 
+from datetime import datetime
+import locale
 from io import StringIO
 import time
+
 
 import streamlit as st
 import pandas as pd
@@ -14,6 +17,17 @@ from github_utilities import read_github_file
 
 NEWS_DB_URL = f"https://api.github.com/repos/wusiuyu/hknews/contents/gia_db.csv"
 WAIT_TIME = 5
+
+def convert_hk_date(date_str):
+    # Set locale for Chinese formatting (optional, depending on the environment)
+    locale.setlocale(locale.LC_TIME, "zh_HK.UTF-8")
+    # Original datetime string
+    dt = datetime.strptime(date_str, "%Y-%m-%d %H:%M")
+    # Format output with weekday and adjusted time
+    formatted_date = dt.strftime("%Y年%-m月%-d日（%A）")  # Format with full weekday name
+    formatted_time = f"香港時間{dt.hour}時{dt.minute:02d}分"
+    return formatted_date + "\n\n" + formatted_time
+
 
 
 # Function to read data from GitHub and cache it
@@ -50,6 +64,8 @@ def run():
                 content += "＊" * (len(row["title"]) + 1)
                 content += "\n\n"
                 content += row['news_content']
+                content += "\n\n"
+                content += convert_hk_date(row['date'])
                 st.write(f"**Content**:\n\n{content}")
     else:
         st.warning("No data available. Please check the GitHub URL.")
