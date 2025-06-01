@@ -29,7 +29,7 @@ def fetch_news_data(url):
 def run():
     # Load the data once and cache the result
     media_df = fetch_news_data(NEWS_DB_URL)
-
+    media_df = media_df.sort_values(by=["date"], ascending=False)
     # Webpage layout
     st.title("News Titles")
 
