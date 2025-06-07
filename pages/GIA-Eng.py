@@ -25,6 +25,10 @@ def convert_hk_date(date_str):
     return formatted_date
 
 
+def content_add_space(content):
+    return "\n\n".join(["     " + c for c in content.split("\n\n")])
+
+
 # Function to read data from GitHub and cache it
 @st.cache_data
 def fetch_news_data(url):
@@ -58,7 +62,7 @@ def run():
                 content += "\n\n"
                 content += "*" * min((len(row["title"]) + 1), 85)
                 content += "\n\n"
-                content += row['news_content']
+                content += content_add_space(row['news_content'])
                 content += "\n\n"
                 content += convert_hk_date(row['date'])
                 content += "\n\n"
