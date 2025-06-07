@@ -19,15 +19,10 @@ NEWS_DB_URL = f"https://api.github.com/repos/wusiuyu/hknews/contents/gia_db.csv"
 WAIT_TIME = 5
 
 def convert_hk_date(date_str):
-    # Set locale for Chinese formatting (optional, depending on the environment)
     dt = datetime.strptime(date_str, "%Y-%m-%d %H:%M")
     # Original datetime string
-    weekdays = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
-    chinese_weekday = weekdays[dt.weekday()]  # dt.weekday() gives index 0-6 (Monday-Sunday)
-    # Format the date manually
-    formatted_date = f"{dt.year}年{dt.month}月{dt.day}日（{chinese_weekday}）"
-    formatted_time = f"香港時間{dt.hour}時{dt.minute:02d}分"  # Adjust to 21:00
-    return formatted_date + "\n\n" + formatted_time
+    formatted_date = f"Ends/{dt.strftime('%A, %B %d, %Y')}\nIssued at HKT {dt.strftime('%H:%M')}"
+    return formatted_date
 
 
 # Function to read data from GitHub and cache it
@@ -61,13 +56,14 @@ def run():
                 st.write(f"**URL**: {row['url']}")
                 content = row["title"]
                 content += "\n\n"
-                content += "＊" * (len(row["title"]) + 1)
+                content += "*" * min((len(row["title"]) + 1), 85)
                 content += "\n\n"
                 content += row['news_content']
                 content += "\n\n"
-                content += "完"
-                content += "\n\n"
+                content += "Ends/"
                 content += convert_hk_date(row['date'])
+                content += "\n\n"
+                content += "N" * 4
                 st.write(f"**Content**:\n\n{content}")
     else:
         st.warning("No data available. Please check the GitHub URL.")
