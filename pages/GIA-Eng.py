@@ -26,7 +26,7 @@ def convert_hk_date(date_str):
 
 
 def content_add_space(content):
-    return "\n\n".join(["     " + c for c in content.split("\n\n")])
+    return "\n\n".join(["　　" + c for c in content.split("\n\n")])
 
 
 # Function to read data from GitHub and cache it
