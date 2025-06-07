@@ -54,6 +54,7 @@ def run():
     if not media_df.empty:
         for _, row in media_df.iterrows():
             with st.expander(f"({row['date']}) {row['title']}"):
+                news_content_add_space = "\n\n".join(["  " + c for c in row['news_content'].split("\n\n")])
                 st.write("---")
                 st.subheader("News Details")
                 st.write(f"**Title**: {row['title']}")
@@ -63,7 +64,7 @@ def run():
                 content += "\n\n"
                 content += "＊" * (len(row["title"]) + 1)
                 content += "\n\n"
-                content += row['news_content']
+                content += news_content_add_space
                 content += "\n\n"
                 content += "完"
                 content += "\n\n"
