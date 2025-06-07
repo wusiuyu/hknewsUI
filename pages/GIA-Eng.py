@@ -61,8 +61,8 @@ def run():
                 title = row["title"]
                 title += "\n\n"
                 st.write(title)
-                breakline = r"\\" + "*" * min((len(row["title"]) + 1), 80) + r"\\"
-                st.write(breakline)
+                breakline = "*" * min((len(row["title"]) + 1), 85)
+                st.text(breakline)
                 content = "\n\n"
                 content += content_add_space(row['news_content'])
                 content += "\n\n"
