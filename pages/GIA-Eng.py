@@ -21,7 +21,7 @@ WAIT_TIME = 5
 def convert_hk_date(date_str):
     dt = datetime.strptime(date_str, "%Y-%m-%d %H:%M")
     # Original datetime string
-    formatted_date = f"Ends/{dt.strftime('%A, %B %d, %Y')}\nIssued at HKT {dt.strftime('%H:%M')}"
+    formatted_date = f"Ends/{dt.strftime('%A, %B %d, %Y')}\n\nIssued at HKT {dt.strftime('%H:%M')}"
     return formatted_date
 
 
@@ -60,7 +60,6 @@ def run():
                 content += "\n\n"
                 content += row['news_content']
                 content += "\n\n"
-                content += "Ends/"
                 content += convert_hk_date(row['date'])
                 content += "\n\n"
                 content += "N" * 4
