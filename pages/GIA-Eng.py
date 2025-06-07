@@ -58,9 +58,11 @@ def run():
                 st.write(f"**Title**: {row['title']}")
                 st.write(f"**Publish**: {row['date']}")
                 st.write(f"**URL**: {row['url']}")
-                content = row["title"]
-                content += "\n\n"
-                content += "*" * min((len(row["title"]) + 1), 80)
+                title = row["title"]
+                title += "\n\n"
+                st.write({title})
+                breakline = "\\" + "*" * min((len(row["title"]) + 1), 80) + "\\"
+                st.write(breakline)
                 content += "\n\n"
                 content += content_add_space(row['news_content'])
                 content += "\n\n"
