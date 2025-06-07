@@ -63,7 +63,7 @@ def run():
                 st.write({title})
                 breakline = "\\" + "*" * min((len(row["title"]) + 1), 80) + "\\"
                 st.write(breakline)
-                content += "\n\n"
+                content = "\n\n"
                 content += content_add_space(row['news_content'])
                 content += "\n\n"
                 content += convert_hk_date(row['date'])
