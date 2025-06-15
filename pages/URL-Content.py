@@ -4,6 +4,10 @@ import requests
 import streamlit as st
 from urllib.parse import quote
 
+import requests
+import streamlit as st
+from urllib.parse import quote
+
 def run():
     # Streamlit UI
     st.title("Media Scraper")
@@ -14,7 +18,7 @@ def run():
         st.session_state.url = ""
 
     # Text input field linked to session state
-    url = st.text_input("Enter URL to scrape:", key="url")
+    url = st.text_input("Enter URL to scrape:", value=st.session_state.url, key="url")
 
     # Buttons
     col1, col2 = st.columns([1, 1])
@@ -26,6 +30,7 @@ def run():
     # Clear button functionality
     if clear_text:
         st.session_state.url = ""  # Reset session state
+        st.experimental_rerun()  # Refresh the UI to reflect changes
 
     # Get Content button functionality
     if get_content:
