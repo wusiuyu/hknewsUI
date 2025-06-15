@@ -9,15 +9,12 @@ def run():
     st.title("Media Scraper")
     st.text("Available: CRadio, Metro, MingPao, OnCC, SingTao")
 
-    # Create a placeholder for the text input
-    input_placeholder = st.empty()
-
     # Initialize session state for URL input
     if "url" not in st.session_state:
         st.session_state.url = ""
 
-    # Display the text input field
-    url = input_placeholder.text_input("Enter URL to scrape:", st.session_state.url)
+    # Text input field linked to session state
+    url = st.text_input("Enter URL to scrape:", key="url")
 
     # Buttons
     col1, col2 = st.columns([1, 1])
@@ -29,7 +26,6 @@ def run():
     # Clear button functionality
     if clear_text:
         st.session_state.url = ""  # Reset session state
-        input_placeholder.empty()  # Clear the input field by recreating it
 
     # Get Content button functionality
     if get_content:
