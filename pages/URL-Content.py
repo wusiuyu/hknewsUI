@@ -4,36 +4,16 @@ import requests
 import streamlit as st
 from urllib.parse import quote
 
-import requests
-import streamlit as st
-from urllib.parse import quote
-
 def run():
     # Streamlit UI
     st.title("Media Scraper")
     st.text("Available: CRadio, Metro, MingPao, OnCC, SingTao")
 
-    # Initialize session state for URL input
-    if "url" not in st.session_state:
-        st.session_state.url = ""
-
-    # Text input field linked to session state
-    url = st.text_input("Enter URL to scrape:", value=st.session_state.url, key="url")
-
-    # Buttons
-    col1, col2 = st.columns([1, 1])
-    with col1:
-        get_content = st.button("Get Content")
-    with col2:
-        clear_text = st.button("Clear")
-
-    # Clear button functionality
-    if clear_text:
-        st.session_state.url = ""  # Reset session state
-        st.experimental_rerun()  # Refresh the UI to reflect changes
+    # Text input field
+    url = st.text_input("Enter URL:")
 
     # Get Content button functionality
-    if get_content:
+    if st.button("Get Content"):
         if url:
             url = quote(url)
             api_url = f"https://hknewsscrapeapi.azurewebsites.net/scrape/?url={url}"  # Adjust API URL if hosted elsewhere
