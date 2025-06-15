@@ -14,7 +14,7 @@ def run():
         st.session_state.url = ""
 
     # Text input field
-    url = st.text_input("Enter URL to scrape:", st.session_state.url)
+    url = st.text_input("Enter URL to scrape:", st.session_state.url, key="url_input")
 
     # Buttons
     col1, col2 = st.columns([1, 1])
@@ -25,8 +25,8 @@ def run():
 
     # Clear button functionality
     if clear_text:
-        st.session_state.url = ""
-        st.rerun()  # Refresh the UI to clear the input field
+        st.session_state.url = ""  # Reset session state
+        st.session_state["url_input"] = ""  # Clear the input field
 
     # Get Content button functionality
     if get_content:
