@@ -4,10 +4,6 @@ import requests
 import streamlit as st
 from urllib.parse import quote
 
-# Function to clear text input
-def clear_text():
-    st.session_state["url"] = ""
-
 def run():
     st.title("Media Scraper")
     st.text("Available: CRadio, Metro, MingPao, OnCC, SingTao")
@@ -34,7 +30,8 @@ def run():
                 st.warning("Please enter a valid URL.")
     with col2:
         if st.button("Clear"):
-            clear_text()
+            st.session_state.url = ""  # Updating session state directly
 
 if __name__ == "__main__":
     run()
+
