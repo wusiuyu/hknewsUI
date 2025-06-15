@@ -17,7 +17,7 @@ def run():
                 data = response.json()
                 st.write(f"**Formatted URL:** {data.get('url')}")
                 st.write(f"**Detected Media:** {data.get('media')}")
-                st.write(f"**News Content:** {data.get('content')}")
+                st.write(f"**Content**:\n\n{data.get('content')}")
             else:
                 st.error("Failed to retrieve media. Check the URL or API.")
         else:
