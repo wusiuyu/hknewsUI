@@ -7,6 +7,7 @@ import streamlit as st
 def run():
     # Streamlit UI
     st.title("Media Scraper")
+    st.text("Available: CRadio, MingPao, OnCC, SingTao")
     url = st.text_input("Enter URL to scrape:")
     if st.button("Scrape Media"):
         if url:
@@ -15,7 +16,6 @@ def run():
             response = requests.get(api_url)
             if response.status_code == 200:
                 data = response.json()
-                st.write("Available: CRadio, MingPao, OnCC, SingTao")
                 st.write(f"**Formatted URL:** {data.get('url')}")
                 st.write(f"**Detected Media:** {data.get('media')}")
                 st.write(f"**Content**:\n\n{data.get('content')}")
