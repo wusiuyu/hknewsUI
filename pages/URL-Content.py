@@ -8,22 +8,22 @@ def run():
     st.title("Media Scraper")
     st.text("Available: CRadio, Metro, MingPao, OnCC, SingTao")
 
-# Text input field
-url = st.text_input("Enter URL:")
+    # Text input field
+    url = st.text_input("Enter URL:")
 
-# Get Content button functionality
-if st.button("Get Content"):
-    if url:
-        url = quote(url)
-        api_url = f"https://hknewsscrapeapi.azurewebsites.net/scrape/?url={url}"  # Adjust API URL if hosted elsewhere
-        response = requests.get(api_url)
-        if response.status_code == 200:
-            data = response.json()
-            st.write(f"**Formatted URL:** {data.get('url')}")
-            st.write(f"**Detected Media:** {data.get('media')}")
-            st.write(f"**Content**:\n\n{data.get('content')}")
+    # Get Content button functionality
+    if st.button("Get Content"):
+        if url:
+            url = quote(url)
+            api_url = f"https://hknewsscrapeapi.azurewebsites.net/scrape/?url={url}"  # Adjust API URL if hosted elsewhere
+            response = requests.get(api_url)
+            if response.status_code == 200:
+                data = response.json()
+                st.write(f"**Formatted URL:** {data.get('url')}")
+                st.write(f"**Detected Media:** {data.get('media')}")
+                st.write(f"**Content**:\n\n{data.get('content')}")
+            else:
+                st.error("Failed to retrieve media. Check the URL or API.")
         else:
-            st.error("Failed to retrieve media. Check the URL or API.")
-    else:
-        st.warning("Please enter a valid URL.")
+            st.warning("Please enter a valid URL.")
 
