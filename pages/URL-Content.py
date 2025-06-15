@@ -7,7 +7,7 @@ from urllib.parse import quote
 def run():
     # Streamlit UI
     st.title("Media Scraper")
-    st.text("Available: CRadio, MingPao, OnCC, SingTao")
+    st.text("Available: CRadio, Metro, MingPao, OnCC, SingTao")
     url = st.text_input("Enter URL to scrape:")
     if st.button("Get Content"):
         if url:
