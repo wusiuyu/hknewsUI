@@ -26,7 +26,7 @@ def run():
     # Clear button functionality
     if clear_text:
         st.session_state.url = ""
-        st.experimental_rerun()  # Refresh the UI to clear the input field
+        st.rerun()  # Refresh the UI to clear the input field
 
     # Get Content button functionality
     if get_content:
