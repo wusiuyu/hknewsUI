@@ -2,15 +2,16 @@
 
 import requests
 import streamlit as st
-
+from urllib.parse import quote
 
 def run():
     # Streamlit UI
     st.title("Media Scraper")
     st.text("Available: CRadio, MingPao, OnCC, SingTao")
     url = st.text_input("Enter URL to scrape:")
-    if st.button("Scrape Media"):
+    if st.button("Get Content"):
         if url:
+            url = quote(url)
             # Make request to FastAPI backend
             api_url = f"https://hknewsscrapeapi.azurewebsites.net/scrape/?url={url}"  # Adjust API URL if hosted elsewhere
             response = requests.get(api_url)
