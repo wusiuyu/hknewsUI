@@ -8,11 +8,30 @@ def run():
     # Streamlit UI
     st.title("Media Scraper")
     st.text("Available: CRadio, Metro, MingPao, OnCC, SingTao")
-    url = st.text_input("Enter URL to scrape:")
-    if st.button("Get Content"):
+
+    # Initialize session state for URL input
+    if "url" not in st.session_state:
+        st.session_state.url = ""
+
+    # Text input field
+    url = st.text_input("Enter URL to scrape:", st.session_state.url)
+
+    # Buttons
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        get_content = st.button("Get Content")
+    with col2:
+        clear_text = st.button("Clear")
+
+    # Clear button functionality
+    if clear_text:
+        st.session_state.url = ""
+        st.experimental_rerun()  # Refresh the UI to clear the input field
+
+    # Get Content button functionality
+    if get_content:
         if url:
             url = quote(url)
-            # Make request to FastAPI backend
             api_url = f"https://hknewsscrapeapi.azurewebsites.net/scrape/?url={url}"  # Adjust API URL if hosted elsewhere
             response = requests.get(api_url)
             if response.status_code == 200:
