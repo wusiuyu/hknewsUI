@@ -5,11 +5,12 @@ import streamlit as st
 from urllib.parse import quote
 
 def run():
+    # Streamlit UI
     st.title("Media Scraper")
     st.text("Available: CRadio, Metro, MingPao, OnCC, SingTao")
 
     # Text input field
-    url = st.text_input("Enter URL:")
+    url = st.text_input("Enter URL to scrape:")
 
     # Get Content button functionality
     if st.button("Get Content"):
@@ -27,3 +28,5 @@ def run():
         else:
             st.warning("Please enter a valid URL.")
 
+if __name__ == "__main__":
+    run()
