@@ -65,14 +65,13 @@ def run():
                 breakline = "*" * min((len(row["title"]) + 1), 85)
                 st.text(breakline)
                 content = "\n\n"
-                content += "　　"
                 content += content_add_space(row['news_content'])
                 content += "\n\n"
                 content += convert_hk_date(row['date'])
                 content += "\n\n"
                 content += "N" * 4
-                # st.write(f"**Content**:\n\n{content}")
-                st.write(f"{content}")
+                st.write(f"**Content**:\n\n{content}")
+                # st.write(f"{content}")
     else:
         st.warning("No data available. Please check the GitHub URL.")
 
