@@ -70,8 +70,8 @@ def run():
                 content += convert_hk_date(row['date'])
                 content += "\n\n"
                 content += "N" * 4
-                st.write(f"**Content**:\n\n{content}")
-                # st.write(f"{content}")
+                # st.write(f"**Content**:\n\n{content}")
+                st.write(f"****:\n\n{content}")
     else:
         st.warning("No data available. Please check the GitHub URL.")
 
